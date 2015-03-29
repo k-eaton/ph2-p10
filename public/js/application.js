@@ -1,22 +1,34 @@
 $(document).ready(function() {
-  bindEvents();
+  var prelingerData;
+
+  $("#welcome").on("submit", function(event) {
+    event.preventDefault();
+    var formData = $(event.target).serialize()
+    console.log("Default prevented")
+
+    var request = $.ajax({
+      url: "/new_search",
+      type: 'POST',
+      data: formData,
+      dataType: 'json'
+    });
+    console.log('test')
+    request.done(function(response){
+      console.log("we're done!")
+      $("#welcome").append(addVideo(response))
+    });
+
+  });
+
 });
 
-
-function bindEvents() {
-  // Bind functions which add, remove, and complete todos to the appropriate
-  // elements
+var addVideo = function(data){
+  var video = '<video  style="width:100%;height:100%;" controls>'
+    + '<source src="https://archive.org/download/'+ data.identifier +'/'+ data.identifier +'_512kb.mp4">'
+    + '<source src="https://archive.org/download/'+ data.identifier +'/'+data.identifier+'.ogv">'
+    + '</video>'
+  return video
 }
 
-function buildTodo(todoName) {
-  // gets todoTemplate stored in DOM.
-  var todoTemplate = $.trim($('#todo_template').html());
-  // Creates an jQueryDOMElement from the todoTemplate.
-  var $todo = $(todoTemplate);
-  // Modifies it's text to use the passed in todoName.
-  $todo.find('h2').text(todoName);
-  // Returns the jQueryDOMElement to be used elsewhere.
-  return $todo;
-}
 
-//Create functions to add, remove and complete todos
+
