@@ -10,9 +10,9 @@ end
 post '/new_search' do
   p params
   p @new_search = params[:search_term].split(' ').join("+")
-  response = HTTParty.get('http://archive.org/advancedsearch.php?q=title%3A%22'+ @new_search +'%22+collection%3A+prelinger+downloads%3A%5B1000+TO+100000000%5D&fl%5B%5D=avg_rating&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=num_reviews&fl%5B%5D=subject&fl%5B%5D=title&fl%5B%5D=year&sort%5B%5D=titleSorter+desc&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json')
-  if response['response']['docs'] == []
-    response = HTTParty.get('http://archive.org/advancedsearch.php?q=subject%3A%22'+ @new_search +'%22+collection%3A+prelinger+downloads%3A%5B1000+TO+100000000%5D+avg_rating%3A%5B3+TO+5%5D&fl%5B%5D=avg_rating&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=num_reviews&fl%5B%5D=subject&fl%5B%5D=title&fl%5B%5D=year&sort%5B%5D=&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json')
+  # response = HTTParty.get('http://archive.org/advancedsearch.php?q=title%3A%22'+ @new_search +'%22+collection%3A+prelinger+downloads%3A%5B1000+TO+100000000%5D&fl%5B%5D=avg_rating&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=num_reviews&fl%5B%5D=subject&fl%5B%5D=title&fl%5B%5D=year&sort%5B%5D=titleSorter+desc&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json')
+  # if response['response']['docs'] == []
+    response = HTTParty.get('http://archive.org/advancedsearch.php?q='+ @new_search +'+collection%3A+prelinger+downloads%3A%5B20000+TO+100000000%5D+num_reviews%3A%5B10+TO+1000%5D&fl%5B%5D=avg_rating&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=num_reviews&fl%5B%5D=subject&fl%5B%5D=title&fl%5B%5D=year&sort%5B%5D=downloads+desc&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json')
   # response['response']['docs'].each do |film|
     p "I'm running"
     @docs = response['response']['docs']
@@ -28,17 +28,17 @@ post '/new_search' do
     {film: @docs}.to_json
     # {match: @match, title: @title, identifier: @identifier, description: @description, subject: @subject, num_reviews: @num_reviews, avg_rating: @avg_rating}.to_json
   # end
-  else
-    @match = true
-    @description = response['response']['docs'][0]['description']
-    @subject = response['response']['docs'][0]['subject']
-    @identifier = response['response']['docs'][0]['identifier']
-    @num_reviews = response['response']['docs'][0]['num_reviews']
-    @avg_rating = response['response']['docs'][0]['avg_rating']
-    @title = response['response']['docs'][0]['title']
-    content_type :json
-    {match: @match, title: @title, identifier: @identifier, description: @description, subject: @subject, num_reviews: @num_reviews, avg_rating: @avg_rating}.to_json
-  end
+  # else
+  #   @match = true
+  #   @description = response['response']['docs'][0]['description']
+  #   @subject = response['response']['docs'][0]['subject']
+  #   @identifier = response['response']['docs'][0]['identifier']
+  #   @num_reviews = response['response']['docs'][0]['num_reviews']
+  #   @avg_rating = response['response']['docs'][0]['avg_rating']
+  #   @title = response['response']['docs'][0]['title']
+  #   content_type :json
+  #   {match: @match, title: @title, identifier: @identifier, description: @description, subject: @subject, num_reviews: @num_reviews, avg_rating: @avg_rating}.to_json
+  # end
 end
 
 get '/video' do

@@ -27,11 +27,13 @@ $(document).ready(function() {
         //   console.log(response.film[index].title)
         //   // $(response.film[index].title).each(function(index, element){
           $("#video").append(listSearchResults(response.film[i]))
+
         //   $("#video").append(listSearchResults(response.film[index].title))
         //     // $("#video").append(listSearchResults(element))
         //   // })
         // })
         // )
+    playSearchListVideo(response.film[i])
         }
       }
     });
@@ -49,14 +51,17 @@ var addVideo = function(data){
 }
 
 var listSearchResults = function(data){
-  var searchResults = '<h3>' + data.title + '</h3>'
+  var searchResults = '<h3><a href="#">' + data.title + '</a></h3>'
+
   return searchResults
-  playSearchListVideo()
 }
 
 var playSearchListVideo = function(filmData){
-  $("#video").empty()
-  $("h3#video").select(function(){
+
+  $("a#video").click(function(){
+    event.preventDefault();
+    console.log("I've been clicked")
+    $("#video").empty()
     $("#video").append(addVideo(filmData))
   })
 
