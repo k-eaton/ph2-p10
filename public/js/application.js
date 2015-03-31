@@ -7,7 +7,7 @@ $(document).ready(function() {
     // of the data, we had to create formData to catch
     // what the search query is supposed to be.
     var formData = $(event.target).serialize()
-    console.log("Default prevented")
+    // console.log("Default prevented")
     $("#video").empty()
 
     var request = $.ajax({
@@ -16,7 +16,7 @@ $(document).ready(function() {
       data: formData,
       dataType: 'json'
     });
-    console.log('test')
+    // console.log('test')
     request.done(function(response){
       for (i = 0;i < response.film.length; i++){
         $("#video").append(listSearchResults(response.film[i]))
@@ -28,7 +28,7 @@ $(document).ready(function() {
         // The name of each 'a' tag gives the array index of the listed film
         console.log(response.film[num].title)
         $("#video").append(addVideo(response.film[num]))
-        $('div.rating1').raty({
+        $('#rating1').raty({
           score: function() {
             return $(this).attr('data-score');
           }
@@ -41,6 +41,8 @@ $(document).ready(function() {
 
 var addVideo = function(data){
   var video = '<h3>'+ data.title +'</h3>'
+    + '<div id="rating1" data-score="'+data.avg_rating+'">'
+    + '</div>'
     + '<video  style="width:100%;height:100%;" controls>'
     + '<source src="https://archive.org/download/'+ data.identifier +'/'+ data.identifier +'_512kb.mp4">'
     + '<source src="https://archive.org/download/'+ data.identifier +'/'+ data.identifier +'.ogv">'
