@@ -19,8 +19,6 @@ gem 'httparty'
 
 gem 'shotgun'
 
-gem 'httparty'
-
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'

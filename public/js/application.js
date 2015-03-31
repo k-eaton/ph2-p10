@@ -22,8 +22,17 @@ $(document).ready(function() {
         console.log("we're done!")
         $("#video").append(addVideo(response))
       } else {
-        console.log(response.title)
-        $("#video").append(listSearchResults(response))
+        for (i = 0;i < response.film.length; i++){
+        // $(response).each(function(index, element) {
+        //   console.log(response.film[index].title)
+        //   // $(response.film[index].title).each(function(index, element){
+          $("#video").append(listSearchResults(response.film[i].title))
+        //   $("#video").append(listSearchResults(response.film[index].title))
+        //     // $("#video").append(listSearchResults(element))
+        //   // })
+        // })
+        // )
+        }
       }
     });
 
@@ -40,7 +49,7 @@ var addVideo = function(data){
 }
 
 var listSearchResults = function(data){
-  var searchResults = '<h1>data.title</h1>'
+  var searchResults = '<h1>' + data + '</h1>'
   return searchResults
 }
 
