@@ -11,7 +11,6 @@ post '/new_search' do
   p params
   p @new_search = params[:search_term].split(' ').join("+")
   response = HTTParty.get('http://archive.org/advancedsearch.php?q=title%3A%22'+ @new_search +'%22+collection%3A+prelinger+downloads%3A%5B1000+TO+100000000%5D&fl%5B%5D=avg_rating&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=num_reviews&fl%5B%5D=subject&fl%5B%5D=title&fl%5B%5D=year&sort%5B%5D=titleSorter+desc&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json')
-  p response['response']['docs']
   if response['response']['docs'] == []
     response = HTTParty.get('http://archive.org/advancedsearch.php?q='+ @new_search +'+collection%3A+prelinger+downloads%3A%5B1000+TO+100000000%5D&fl%5B%5D=avg_rating&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=num_reviews&fl%5B%5D=subject&fl%5B%5D=title&fl%5B%5D=year&sort%5B%5D=titleSorter+desc&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json')
     @match = false
