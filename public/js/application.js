@@ -23,6 +23,7 @@ $(document).ready(function() {
         $("#video").append(addVideo(response))
       } else {
         console.log(response.title)
+        $("#video").append(listSearchResults(response))
       }
     });
 
@@ -38,5 +39,8 @@ var addVideo = function(data){
   return video
 }
 
-
+var listSearchResults = function(data){
+  var searchResults = '<h1>data.title</h1>'
+  return searchResults
+}
 
