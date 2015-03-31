@@ -8,6 +8,7 @@ $(document).ready(function() {
     // what the search query is supposed to be.
     var formData = $(event.target).serialize()
     console.log("Default prevented")
+    $("#video").empty()
 
     var request = $.ajax({
       url: "/new_search",
@@ -17,9 +18,9 @@ $(document).ready(function() {
     });
     console.log('test')
     request.done(function(response){
-      if (response.match == true){
+      if (response.match === true){
         console.log("we're done!")
-        $("#welcome").append(addVideo(response))
+        $("#video").append(addVideo(response))
       } else {
         console.log(response.title)
       }
