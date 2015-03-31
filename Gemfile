@@ -15,6 +15,8 @@ gem 'activerecord'
 
 gem 'rake'
 
+gem 'httparty'
+
 gem 'shotgun'
 
 group :test do
