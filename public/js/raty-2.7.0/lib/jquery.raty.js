@@ -749,7 +749,7 @@
     starOff      : 'star-off.png',
     starOn       : 'star-on.png',
     starType     : 'img',
-    target       : undefined,
+    target       : $("div.rating1"),
     targetFormat : '{score}',
     targetKeep   : false,
     targetScore  : undefined,

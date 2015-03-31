@@ -8,13 +8,12 @@ end
 
 
 post '/new_search' do
-  p params
   p @new_search = params[:search_term].split(' ').join("+")
   # response = HTTParty.get('http://archive.org/advancedsearch.php?q=title%3A%22'+ @new_search +'%22+collection%3A+prelinger+downloads%3A%5B1000+TO+100000000%5D&fl%5B%5D=avg_rating&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=num_reviews&fl%5B%5D=subject&fl%5B%5D=title&fl%5B%5D=year&sort%5B%5D=titleSorter+desc&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json')
   # if response['response']['docs'] == []
     response = HTTParty.get('http://archive.org/advancedsearch.php?q='+ @new_search +'+collection%3A+prelinger+downloads%3A%5B20000+TO+100000000%5D+num_reviews%3A%5B10+TO+1000%5D&fl%5B%5D=avg_rating&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=num_reviews&fl%5B%5D=subject&fl%5B%5D=title&fl%5B%5D=year&sort%5B%5D=downloads+desc&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json')
   # response['response']['docs'].each do |film|
-    p "I'm running"
+    # p "I'm running"
     @docs = response['response']['docs']
     # p film
     # @match = false
@@ -42,6 +41,7 @@ post '/new_search' do
 end
 
 get '/video' do
-
+  p params
+  # @docs.params[0]['identifier']
 
 end
