@@ -17,8 +17,12 @@ $(document).ready(function() {
     });
     console.log('test')
     request.done(function(response){
-      console.log("we're done!")
-      $("#welcome").append(addVideo(response))
+      if (response.match == true){
+        console.log("we're done!")
+        $("#welcome").append(addVideo(response))
+      } else {
+        console.log(response.title)
+      }
     });
 
   });

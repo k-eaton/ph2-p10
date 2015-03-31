@@ -21,7 +21,7 @@ post '/new_search' do
     @avg_rating = response['response']['docs'][0]['avg_rating']
     @title = response['response']['docs'][0]['title']
     content_type :json
-    {identifier: @identifier, description: @description, subject: @subject, num_reviews: @num_reviews, avg_rating: @avg_rating}.to_json
+    {match: @match, title: @title, identifier: @identifier, description: @description, subject: @subject, num_reviews: @num_reviews, avg_rating: @avg_rating}.to_json
   else
     @match = true
     @description = response['response']['docs'][0]['description']
@@ -31,7 +31,7 @@ post '/new_search' do
     @avg_rating = response['response']['docs'][0]['avg_rating']
     @title = response['response']['docs'][0]['title']
     content_type :json
-    {identifier: @identifier, description: @description, subject: @subject, num_reviews: @num_reviews, avg_rating: @avg_rating}.to_json
+    {match: @match, title: @title, identifier: @identifier, description: @description, subject: @subject, num_reviews: @num_reviews, avg_rating: @avg_rating}.to_json
   end
 end
 
