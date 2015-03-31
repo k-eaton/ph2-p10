@@ -26,7 +26,7 @@ $(document).ready(function() {
         // $(response).each(function(index, element) {
         //   console.log(response.film[index].title)
         //   // $(response.film[index].title).each(function(index, element){
-          $("#video").append(listSearchResults(response.film[i].title))
+          $("#video").append(listSearchResults(response.film[i]))
         //   $("#video").append(listSearchResults(response.film[index].title))
         //     // $("#video").append(listSearchResults(element))
         //   // })
@@ -49,7 +49,15 @@ var addVideo = function(data){
 }
 
 var listSearchResults = function(data){
-  var searchResults = '<h1>' + data + '</h1>'
+  var searchResults = '<h3>' + data.title + '</h3>'
   return searchResults
+  playSearchListVideo()
 }
 
+var playSearchListVideo = function(filmData){
+  $("#video").empty()
+  $("h3#video").select(function(){
+    $("#video").append(addVideo(filmData))
+  })
+
+}
