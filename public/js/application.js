@@ -33,7 +33,7 @@ $(document).ready(function() {
             return $('#rating1').attr('datascore')
           },
           click: function(score, evt) {
-    alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
+    alert('ID: ' + '#rating1'.id + "\nscore: " + score + "\nevent: " + evt);
           }
         });
         $('#rating2').raty({
@@ -53,6 +53,7 @@ var addVideo = function(data){
     + '</div>'
     + '<div id="rating2" datascore="'+data.avg_rating+'">'
     + '</div>'
+    + '<p>'+ data.description +'</p>'
     + '<video  style="width:100%;height:100%;" controls>'
     + '<source src="https://archive.org/download/'+ data.identifier +'/'+ data.identifier +'_512kb.mp4">'
     + '<source src="https://archive.org/download/'+ data.identifier +'/'+ data.identifier +'.ogv">'
