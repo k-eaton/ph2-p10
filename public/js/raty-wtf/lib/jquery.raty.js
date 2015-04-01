@@ -46,7 +46,7 @@
         methods._createScore.call(this);
         methods._apply.call(this, this.opt.score);
         methods._setTitle.call(this, this.opt.score);
-        methods._target.call('#rating1', this.opt.score);
+        methods._target.call('#rating2', this.opt.score);
 
         if (this.opt.readOnly) {
           methods._lock.call(this);
@@ -749,7 +749,7 @@
     starOff      : 'star-off.png',
     starOn       : 'star-on.png',
     starType     : 'img',
-    target       : $("#rating1"),
+    target       : $("#rating2"),
     targetFormat : '{score}',
     targetKeep   : false,
     targetScore  : undefined,

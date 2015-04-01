@@ -30,7 +30,15 @@ $(document).ready(function() {
         $("#video").append(addVideo(response.film[num]))
         $('#rating1').raty({
           score: function() {
-            return $(this).attr('data-score');
+            return $('#rating1').attr('datascore')
+          },
+          click: function(score, evt) {
+    alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
+          }
+        });
+        $('#rating2').raty({
+          score: function() {
+            return $('#rating2').attr('datascore')
           }
         });
       });
@@ -41,7 +49,9 @@ $(document).ready(function() {
 
 var addVideo = function(data){
   var video = '<h3>'+ data.title +'</h3>'
-    + '<div id="rating1" data-score="'+data.avg_rating+'">'
+    + '<div id="rating1" datascore="'+data.avg_rating+'">'
+    + '</div>'
+    + '<div id="rating2" datascore="'+data.avg_rating+'">'
     + '</div>'
     + '<video  style="width:100%;height:100%;" controls>'
     + '<source src="https://archive.org/download/'+ data.identifier +'/'+ data.identifier +'_512kb.mp4">'
