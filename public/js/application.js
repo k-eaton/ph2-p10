@@ -15,7 +15,7 @@ $(document).ready(function() {
       type: 'POST',
       data: formData,
       dataType: 'json'
-    });
+    })
     // console.log('test')
     request.done(function(response){
       for (i = 0;i < response.film.length; i++){
@@ -33,14 +33,14 @@ $(document).ready(function() {
             return $('#rating1').attr('datascore')
           },
           click: function(score, evt) {
-    alert('ID: ' + '#rating1'.id + "\nscore: " + score + "\nevent: " + evt);
+    alert('ID: ' + '#rating1'.id + " score: " + score + " event: " + evt);
           }
         });
-        $('#rating2').raty({
-          score: function() {
-            return $('#rating2').attr('datascore')
-          }
-        });
+        // $('#rating2').raty({
+        //   score: function() {
+        //     return $('#rating2').attr('datascore')
+        //   }
+        // });
       });
     });
   });

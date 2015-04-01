@@ -741,7 +741,7 @@
     precision    : false,
     readOnly     : false,
     round        : { down: 0.25, full: 0.6, up: 0.76 },
-    score        : 1,
+    score        : undefined,
     scoreName    : 'score',
     single       : false,
     space        : true,
