@@ -1,7 +1,9 @@
 class CreateRatings < ActiveRecord::Migration
   def change
     create_table :ratings do |t|
-      t.integer :rating
+      t.decimal :rating
+      t.decimal :wtfrating
+      t.string :identifier
 
       t.timestamp
     end

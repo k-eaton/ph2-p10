@@ -28,22 +28,24 @@ $(document).ready(function() {
         // The name of each 'a' tag gives the array index of the listed film
         console.log(response.film[num].title)
         $("#video").append(addVideo(response.film[num]))
-
+        $("#rateit2").bind('rated', function (event, value) {
+          $.ajax({
+            url: '/video', //your server side script
+            dataType: 'json',
+            data: {identifier: response.film[num].identifier, wtf_value: value },
+            type: 'POST',
+          })
+        });
+        $("#rateit").bind('rated', function (event, value) {
+          $.ajax({
+            url: '/video', //your server side script
+            dataType: 'json',
+            data: { star_value: value },
+            type: 'POST',
+          })
+        });
       });
-      // $.ajax({
-      //        url: '/video', //your server side script
-      //        data: { id: productID, value: value }, //our data
-      //        type: 'POST',
-      //        success: function (data) {
-      //            $('#response').append('<li>' + data + '</li>');
-
-      //        },
-      //        error: function (jxhr, msg, err) {
-      //            $('#response').append('<li style="color:red">' + msg + '</li>');
-      //        }
-      //    });
     });
-
   });
 });
 
@@ -51,17 +53,19 @@ $(document).ready(function() {
 var addVideo = function(data){
   var video = '<h3>'+ data.title +'</h3>'
     + '<input type="hidden" id="backing6">'
-    + '<div id="rateit2" class="wtf" data-rateit-starwidth="32" data-rateit-starheight="32" data-rateit-resetable="false">'
+    + '<div id="rateit2" class="wtf" data-rateit-starwidth="32" data-rateit-starheight="32" data-rateit-resetable="false" data-rateit-value="2.5" data-rateit-ispreset="true">'
     + '</div>'
     + '<script type="text/javascript">'
     + '  $(function () { $("#rateit2").rateit({ backingfld: "#backing6" }); });'
-    + '</script> <br>'
+    + '</script>'
+    + '<div id="wtfrating"></div>'
     + '<input type="hidden" id="backing6">'
     + '<div id="rateit" class="bigstars" data-rateit-starwidth="32" data-rateit-starheight="32" data-rateit-resetable="false">'
     + '</div>'
     + '<script type="text/javascript">'
     + '  $(function () { $("#rateit").rateit({ backingfld: "#backing6" }); });'
     + '</script>'
+    + '<div id="starrating"></div>'
     + '<p>'+ data.description +'</p>'
     + '<video  style="width:100%;height:100%;" controls>'
     + '<source src="https://archive.org/download/'+ data.identifier +'/'+ data.identifier +'_512kb.mp4">'
