@@ -46,7 +46,7 @@
         methods._createScore.call(this);
         methods._apply.call(this, this.opt.score);
         methods._setTitle.call(this, this.opt.score);
-        methods._target.call('#rating1', this.opt.score);
+        methods._target.call(this, this.opt.score);
 
         if (this.opt.readOnly) {
           methods._lock.call(this);

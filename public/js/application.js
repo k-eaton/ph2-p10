@@ -28,28 +28,40 @@ $(document).ready(function() {
         // The name of each 'a' tag gives the array index of the listed film
         console.log(response.film[num].title)
         $("#video").append(addVideo(response.film[num]))
-        $('#rating1').raty({
-          score: function() {
-            return $('#rating1').attr('datascore')
-          },
-        });
-        // $('#rating2').raty({
-        //   score: function() {
-        //     return $('#rating2').attr('datascore')
-        //   }
-        // });
+
       });
+      // $.ajax({
+      //        url: '/video', //your server side script
+      //        data: { id: productID, value: value }, //our data
+      //        type: 'POST',
+      //        success: function (data) {
+      //            $('#response').append('<li>' + data + '</li>');
+
+      //        },
+      //        error: function (jxhr, msg, err) {
+      //            $('#response').append('<li style="color:red">' + msg + '</li>');
+      //        }
+      //    });
     });
+
   });
 });
 
 
 var addVideo = function(data){
   var video = '<h3>'+ data.title +'</h3>'
-    + '<div id="rating1" datascore="'+data.avg_rating+'">'
+    + '<input type="hidden" id="backing6">'
+    + '<div id="rateit2" class="wtf" data-rateit-starwidth="32" data-rateit-starheight="32" data-rateit-resetable="false">'
     + '</div>'
-    + '<div id="rating2" datascore="'+data.avg_rating+'">'
+    + '<script type="text/javascript">'
+    + '  $(function () { $("#rateit2").rateit({ backingfld: "#backing6" }); });'
+    + '</script> <br>'
+    + '<input type="hidden" id="backing6">'
+    + '<div id="rateit" class="bigstars" data-rateit-starwidth="32" data-rateit-starheight="32" data-rateit-resetable="false">'
     + '</div>'
+    + '<script type="text/javascript">'
+    + '  $(function () { $("#rateit").rateit({ backingfld: "#backing6" }); });'
+    + '</script>'
     + '<p>'+ data.description +'</p>'
     + '<video  style="width:100%;height:100%;" controls>'
     + '<source src="https://archive.org/download/'+ data.identifier +'/'+ data.identifier +'_512kb.mp4">'
