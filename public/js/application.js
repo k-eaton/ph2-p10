@@ -32,9 +32,6 @@ $(document).ready(function() {
           score: function() {
             return $('#rating1').attr('datascore')
           },
-          click: function(score, evt) {
-    alert('ID: ' + '#rating1'.id + " score: " + score + " event: " + evt);
-          }
         });
         // $('#rating2').raty({
         //   score: function() {
