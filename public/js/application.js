@@ -21,7 +21,7 @@ $(document).ready(function() {
       for (i = 0;i < response.film.length; i++){
         $("#video").append(listSearchResults(response.film[i]))
       }
-      $('a.videoLink').on('click', function(event){
+      $('a.videolink').on('click', function(event){
         event.preventDefault();
         $("#video").empty()
         var num = this.name;
@@ -42,6 +42,31 @@ $(document).ready(function() {
             dataType: 'json',
             data: { identifier: response.film[num].identifier, star_value: value },
             type: 'POST',
+          })
+        });
+
+        $("#rateit").bind('rated', function (event, value){
+          $.ajax({
+            url: '/video/rating',
+            type: 'GET',
+            dataType: 'json',
+            data: {identifier: response.film[num].identifier}
+          })
+          .done(function(avgRating){
+            $("#starrating").empty()
+            $("#starrating").append('<h4>'+avgRating.avg_rating+'</h4>')
+          })
+        });
+        $("#rateit2").bind('rated', function (event, value){
+          $.ajax({
+            url: '/video/wtfrating',
+            type: 'GET',
+            dataType: 'json',
+            data: {identifier: response.film[num].identifier}
+          })
+          .done(function(avgWtfRating){
+            $("#wtfrating").empty()
+            $("#wtfrating").append('<h4>'+avgWtfRating.avg_wtf_rating+'</h4>')
           })
         });
       });
@@ -66,8 +91,8 @@ var addVideo = function(data){
     + '  $(function () { $("#rateit").rateit({ backingfld: "#backing6" }); });'
     + '</script>'
     + '<div id="starrating"></div>'
-    + '<p>'+ data.description +'</p>'
-    + '<video  style="width:100%;height:100%;" controls>'
+    + '<p class="description">'+ data.description +'</p>'
+    + '<video id="vidcontainer" style="width:100%;height:100%;" controls>'
     + '<source src="https://archive.org/download/'+ data.identifier +'/'+ data.identifier +'_512kb.mp4">'
     + '<source src="https://archive.org/download/'+ data.identifier +'/'+ data.identifier +'.ogv">'
     + '</video>'
@@ -75,7 +100,7 @@ var addVideo = function(data){
 }
 
 var listSearchResults = function(data){
-  var searchResults = '<h3><a href="/video" name="'+ i +'" class="videoLink">' + data.title + '</a></h3>'
+  var searchResults = '<h3><a href="/video" name="'+ i +'" class="videolink">' + data.title + '</a></h3>'
 
   return searchResults
 }

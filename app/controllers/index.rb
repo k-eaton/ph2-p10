@@ -1,5 +1,4 @@
 require 'httparty'
-require 'bigdecimal'
 
 
 get '/' do
@@ -47,19 +46,60 @@ post '/video' do
   p @rating = params[:star_value].to_i
   p @identifier = params[:identifier]
   p @new_record = Rating.new(identifier: @identifier, wtfrating: @wtf_data)
-  if @wtf_data != nil
+  if @wtf_data != 0
     @new_record.update_attributes(wtfrating: @wtf_data)
   end
-  if @rating != nil
+  if @rating != 0
     @new_record.update_attributes(rating: @rating)
   end
 
-  @avg_rating = Rating.where(identifier)
-
-
 end
 
+get '/video/rating' do
+  @identifier = params[:identifier]
+  @avg_rating_array = Rating.where(identifier: @identifier)
+  i = 0
+  sum = 0
+  @avg_rating_array.each do |rating|
+    if rating.rating == nil
+      rating.rating = 0
+    end
+    if rating.rating != 0
+      sum += rating.rating
+      i += 1
+    end
+  end
+  if i != 0
+    @avg_rating = (sum/i.to_f).round(2)
+  else
+    @avg_rating = "This film hasn't been rated yet"
+  end
+  content_type :json
+  {avg_rating: @avg_rating}.to_json
+end
 
+get '/video/wtfrating' do
+  @identifier = params[:identifier]
+  @avg_wtf_rating_array = Rating.where(identifier: @identifier)
+  i = 0
+  sum = 0
+  @avg_wtf_rating_array.each do |rating|
+    if rating.wtfrating == nil
+      rating.wtfrating = 0
+    end
+    if rating.wtfrating != 0
+      sum += rating.wtfrating
+      i += 1
+    end
+  end
+  if i != 0
+    @avg_wtf_rating = (sum/i.to_f).round(2)
+  else
+    @avg_wtf_rating = "This film hasn't been rated yet"
+  end
+  content_type :json
+  {avg_wtf_rating: @avg_wtf_rating}.to_json
+end
 
 
 
