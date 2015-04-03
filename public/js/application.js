@@ -40,7 +40,7 @@ $(document).ready(function() {
           $.ajax({
             url: '/video', //your server side script
             dataType: 'json',
-            data: { star_value: value },
+            data: { identifier: response.film[num].identifier, star_value: value },
             type: 'POST',
           })
         });

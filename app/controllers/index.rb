@@ -1,4 +1,6 @@
 require 'httparty'
+require 'bigdecimal'
+
 
 get '/' do
   # Look in app/views/index.erb
@@ -41,10 +43,18 @@ post '/new_search' do
 end
 
 post '/video' do
-  p @wtf_data = params[:wtf_value]
-  p @wtf_identifier = params[:identifier]
-  p @star_data = params[:star_value]
-  Rating.create
+  p @wtf_data = params[:wtf_value].to_i
+  p @rating = params[:star_value].to_i
+  p @identifier = params[:identifier]
+  p @new_record = Rating.new(identifier: @identifier, wtfrating: @wtf_data)
+  if @wtf_data != nil
+    @new_record.update_attributes(wtfrating: @wtf_data)
+  end
+  if @rating != nil
+    @new_record.update_attributes(rating: @rating)
+  end
+
+  @avg_rating = Rating.where(identifier)
 
 
 end
